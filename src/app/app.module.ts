@@ -4,7 +4,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
-import { NewTodoComponent } from './components/new-todo/new-todo.component';
 import { TodoListComponent } from './components/todo-list/todo-list.component';
 
 import { TodoDataService } from "./services/todo-data.service";
@@ -12,7 +11,6 @@ import { TodoDataService } from "./services/todo-data.service";
 @NgModule({
   declarations: [
     AppComponent,
-    NewTodoComponent,
     TodoListComponent
   ],
   imports: [

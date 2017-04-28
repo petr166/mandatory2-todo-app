@@ -5,14 +5,31 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class TodoDataService {
+  url: string = "https://todo-api-blabla.herokuapp.com/todos";
 
   constructor(private http: Http) { }
 
+  // get all todos
   getTodos(): any {
-    let url = "https://todo-api-blabla.herokuapp.com/todos";
-    let request = this.http.get(url).map(this.extractData);
+    let observableReq = this.http.get(this.url).map(this.extractData);
 
-    return request;
+    return observableReq;
+  }
+
+  // add a new todo
+  addTodo(todo): any {
+    let route = this.url + "/create";
+
+    // prepare the request
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let reqObtions = new RequestOptions({ headers: headers });
+    let reqBody = {name: todo.name};
+
+    // POST
+    let observableReq = this.http.post(route, reqBody, reqObtions)
+      .map(this.extractData);
+
+    return observableReq;
   }
 
   extractData(res: Response): any {

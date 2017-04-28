@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { Todo } from "../../models/todo";
 import { TodoDataService } from "../../services/todo-data.service";
@@ -10,12 +11,39 @@ import { TodoDataService } from "../../services/todo-data.service";
 })
 
 export class TodoListComponent implements OnInit {
+  newTodoForm: FormGroup;
   todoList: Todo[];
 
-  constructor(private todoDataService: TodoDataService) { }
+  constructor(private formBuilder: FormBuilder, private todoDataService: TodoDataService) { }
 
   ngOnInit() {
+    this.initForm();
     this.getTodoList();
+  }
+
+  initForm(): void {
+    this.newTodoForm = this.formBuilder.group({
+      name: ["", [ Validators.required, Validators.minLength(2) ]]
+    });
+  }
+
+  onAdd():void {
+    let formData = this.newTodoForm.value;
+    console.log("formData:", formData);
+    console.log("formValid:", this.newTodoForm.valid);
+
+    // here we will call the service that talks to the api
+    this.todoDataService.addTodo(formData)
+    .subscribe(data => {
+      if (data.success == true) {
+        console.log("addTodo() successful");
+
+        let newTodo: Todo = {name:formData.name, completed:false};
+        this.todoList.push(newTodo);
+      }
+    });
+
+    this.newTodoForm.patchValue({name:""});
   }
 
   deleteTodo(todo: Todo): void {

@@ -1,3 +1,32 @@
+<form [formGroup]="newTodoForm"
+  (ngSubmit)="onAdd()"
+  class="form-inline"
+  novalidate="true"
+  autocomplete="nope"
+>
+
+  <div class="form-group">
+
+    <input type="text"
+      name="name"
+      class="form-control"
+      id="name"
+      placeholder="New todo"
+      formControlName="name"
+      autofocus="true"
+    >
+
+  </div>
+
+  <button type="submit"
+    class="btn btn-primary"
+    name="add"
+    [disabled]="newTodoForm.invalid"
+  >Add
+  </button>
+
+</form>
+
 <ul class="list-unstyled">
 
   <li *ngFor="let todo of todoList">
