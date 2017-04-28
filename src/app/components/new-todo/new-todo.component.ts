@@ -6,6 +6,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
   templateUrl: './new-todo.component.html',
   styleUrls: ['./new-todo.component.scss']
 })
+
 export class NewTodoComponent implements OnInit {
   newTodoForm: FormGroup;
 
@@ -24,7 +25,7 @@ export class NewTodoComponent implements OnInit {
     this.newTodoForm.patchValue({name:""});
     let formData = this.newTodoForm.value;
 
-    // here we will call the service that talks to the server
+    // here we will call the service that talks to the api
   }
 
 }
