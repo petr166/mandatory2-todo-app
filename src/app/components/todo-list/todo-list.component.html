@@ -33,7 +33,7 @@
 
     <input type="checkbox"
     name="completed"
-    (click)="updateTodo(todo)"
+    (click)="onUpdate(todo)"
     [checked]="todo.completed"
     >
 
@@ -42,7 +42,7 @@
     <button type="button"
       class="btn btn-danger"
       name="delete"
-      (click)="deleteTodo(todo)"
+      (click)="onDelete(todo)"
       >Delete
     </button>
 

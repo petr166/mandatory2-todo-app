@@ -29,35 +29,34 @@ export class TodoListComponent implements OnInit {
 
   onAdd():void {
     let formData = this.newTodoForm.value;
-    console.log("formData:", formData);
-    console.log("formValid:", this.newTodoForm.valid);
-
-    // here we will call the service that talks to the api
     this.todoDataService.addTodo(formData)
-    .subscribe(data => {
-      if (data.success == true) {
-        console.log("addTodo() successful");
+      .subscribe(data => {
+        if (data.success == true) {
+          let newTodo: Todo = { name: formData.name, completed: false };
+          this.todoList.push(newTodo);
 
-        let newTodo: Todo = {name:formData.name, completed:false};
-        this.todoList.push(newTodo);
-      }
-    });
+          console.log("added:", newTodo);
+        }
+      });
 
     this.newTodoForm.patchValue({name:""});
   }
 
-  deleteTodo(todo: Todo): void {
-    // here we will call the service that talks to the api
+  onDelete(todo: Todo): void {
+    this.todoDataService.deleteTodo(todo)
+      .subscribe(data => {
+        if (data.success == true) {
+          let deleteIndex: number = this.todoList.indexOf(todo);
+          if (deleteIndex > -1) {
+            this.todoList.splice(deleteIndex, 1);
+          }
 
-    let deleteIndex: number = this.todoList.indexOf(todo);
-    if (deleteIndex > -1) {
-      this.todoList.splice(deleteIndex, 1);
-    }
-
-    console.log("deleted:", todo);
+          console.log("deleted:", todo);
+        }
+      });
   }
 
-  updateTodo(todo: Todo): void {
+  onUpdate(todo: Todo): void {
     // here we will call the service that talks to the api
 
     if (todo.completed == false) {

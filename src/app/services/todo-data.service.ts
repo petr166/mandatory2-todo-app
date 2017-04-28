@@ -32,6 +32,22 @@ export class TodoDataService {
     return observableReq;
   }
 
+  // delete a todo
+  deleteTodo(todo): any {
+    let route = this.url + "/delete";
+
+    // prepare the request
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let reqObtions = new RequestOptions({ headers: headers });
+    let reqBody = {name: todo.name};
+
+    // POST
+    let observableReq = this.http.post(route, reqBody, reqObtions)
+      .map(this.extractData);
+
+    return observableReq;
+  }
+
   extractData(res: Response): any {
     let body = res.json();
     return body || { };
