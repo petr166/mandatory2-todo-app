@@ -21,20 +21,21 @@ export class TodoListComponent implements OnInit {
     this.getTodoList();
   }
 
+  // initialize the 'newTodo' form
   initForm(): void {
     this.newTodoForm = this.formBuilder.group({
       name: ["", [ Validators.required, Validators.minLength(2) ]]
     });
   }
 
-  onAdd():void {
+  // add button action
+  onAdd(): void {
     let formData = this.newTodoForm.value;
     this.todoDataService.addTodo(formData)
       .subscribe(data => {
         if (data.success == true) {
           let newTodo: Todo = { name: formData.name, completed: false };
           this.todoList.push(newTodo);
-
           console.log("added:", newTodo);
         }
       });
@@ -42,6 +43,7 @@ export class TodoListComponent implements OnInit {
     this.newTodoForm.patchValue({name:""});
   }
 
+  // delete button action
   onDelete(todo: Todo): void {
     this.todoDataService.deleteTodo(todo)
       .subscribe(data => {
@@ -50,23 +52,23 @@ export class TodoListComponent implements OnInit {
           if (deleteIndex > -1) {
             this.todoList.splice(deleteIndex, 1);
           }
-
           console.log("deleted:", todo);
         }
       });
   }
 
+  // checkbox toggle action
   onUpdate(todo: Todo): void {
     this.todoDataService.updateTodo(todo)
       .subscribe(data => {
         if (data.success == true) {
           todo.completed = !todo.completed;
-
           console.log("updated:", todo);
         }
       });
   }
 
+  // retrieve the todos list
   getTodoList(): void {
     this.todoDataService.getTodos()
       .subscribe(data => {

@@ -5,52 +5,39 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class TodoDataService {
-  url: string = "https://todo-api-blabla.herokuapp.com/todos";
+  apiUrl: string = "https://todo-api-blabla.herokuapp.com/todos";
 
   constructor(private http: Http) { }
 
+
   // get all todos
   getTodos(): any {
-    let observableReq = this.http.get(this.url).map(this.extractData);
-
+    let observableReq = this.http.get(this.apiUrl).map(this.extractData);
     return observableReq;
   }
 
   // add a new todo
   addTodo(todo): any {
-    let route = this.url + "/create";
-
-    // prepare the request
-    let headers = new Headers({ 'Content-Type': 'application/json' });
-    let reqObtions = new RequestOptions({ headers: headers });
-    let reqBody = {name: todo.name};
-
-    // POST
-    let observableReq = this.http.post(route, reqBody, reqObtions)
-      .map(this.extractData);
-
-    return observableReq;
+    let updateReq = this.postTodos("/create", todo);
+    return updateReq;
   }
 
   // delete a todo
   deleteTodo(todo): any {
-    let route = this.url + "/delete";
-
-    // prepare the request
-    let headers = new Headers({ 'Content-Type': 'application/json' });
-    let reqObtions = new RequestOptions({ headers: headers });
-    let reqBody = {name: todo.name};
-
-    // POST
-    let observableReq = this.http.post(route, reqBody, reqObtions)
-      .map(this.extractData);
-
-    return observableReq;
+    let updateReq = this.postTodos("/delete", todo);
+    return updateReq;
   }
 
   // update a todo
   updateTodo(todo): any {
-    let route = this.url + "/update";
+    let updateReq = this.postTodos("/update", todo);
+    return updateReq;
+  }
+
+  // generic function for POST request to apiUrl/todos/:something
+  postTodos(route: string, todo): any {
+    let reqUrl: string = this.apiUrl + route;
+    console.log(this.apiUrl, reqUrl);
 
     // prepare the request
     let headers = new Headers({ 'Content-Type': 'application/json' });
@@ -58,12 +45,13 @@ export class TodoDataService {
     let reqBody = {name: todo.name};
 
     // POST
-    let observableReq = this.http.post(route, reqBody, reqObtions)
+    let observableReq = this.http.post(reqUrl, reqBody, reqObtions)
       .map(this.extractData);
 
     return observableReq;
   }
 
+  // function to extract the response data
   extractData(res: Response): any {
     let body = res.json();
     return body || { };
