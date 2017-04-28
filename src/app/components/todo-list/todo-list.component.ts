@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Todo } from "../../models/todo";
+import { TodoDataService } from "../../services/todo-data.service";
 
 @Component({
   selector: 'app-todo-list',
@@ -11,18 +12,10 @@ import { Todo } from "../../models/todo";
 export class TodoListComponent implements OnInit {
   todoList: Todo[];
 
-  // mock data, delete after connected to API
-  todos: Todo[] = [
-    { name: "Wash", completed: false },
-    { name: "Go", completed: false },
-    { name: "Clean", completed: false },
-    { name: "Run", completed: false },
-  ];
-
-  constructor() { }
+  constructor(private todoDataService: TodoDataService) { }
 
   ngOnInit() {
-    this.todoList = this.todos;
+    this.getTodoList();
   }
 
   deleteTodo(todo: Todo): void {
@@ -44,6 +37,16 @@ export class TodoListComponent implements OnInit {
     } else todo.completed = false;
 
     console.log("updated:", todo);
+  }
+
+  getTodoList(): void {
+    this.todoDataService.getTodos()
+      .subscribe(data => {
+        if (data.success == true) {
+          this.todoList = data.todos;
+          console.log("getTodos() successful");
+        }
+      });
   }
 
 }
