@@ -57,13 +57,14 @@ export class TodoListComponent implements OnInit {
   }
 
   onUpdate(todo: Todo): void {
-    // here we will call the service that talks to the api
+    this.todoDataService.updateTodo(todo)
+      .subscribe(data => {
+        if (data.success == true) {
+          todo.completed = !todo.completed;
 
-    if (todo.completed == false) {
-      todo.completed = true;
-    } else todo.completed = false;
-
-    console.log("updated:", todo);
+          console.log("updated:", todo);
+        }
+      });
   }
 
   getTodoList(): void {
