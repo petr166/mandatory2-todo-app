@@ -1,0 +1,31 @@
+@import "./components/todo-list/sass-flexbox";
+
+.container {
+  @include display-flex();
+	@include flex-flow(column, nowrap);
+	@include align-items(center);
+  padding-bottom: 15px;
+}
+
+h1 {
+  width: 90vw;
+  font-size: 8vw;
+  text-align: center;
+  padding: 5vh 3vw 3vh 3vw;
+  margin: 0;
+  background-color: #47dbc3;
+  color: white;
+}
+
+@media only screen and (min-width: 568px) {
+  h1 {
+    font-size: 6vw;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  h1 {
+    width: 70vw;
+    font-size: 5vw;
+  }
+}

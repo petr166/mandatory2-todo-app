@@ -19,7 +19,7 @@
   </div>
 
   <button type="submit"
-    class="btn btn-primary"
+    class="btn"
     name="add"
     [disabled]="newTodoForm.invalid"
   >Add
@@ -27,18 +27,20 @@
 
 </form>
 
+<div class="arrow-down"></div>
+
 <ul class="list-unstyled">
 
   <li *ngFor="let todo of todoList">
+    <span>
+        <input type="checkbox"
+          name="completed"
+          (click)="onUpdate(todo)"
+          [checked]="todo.completed"
+        >
 
-    <input type="checkbox"
-    name="completed"
-    (click)="onUpdate(todo)"
-    [checked]="todo.completed"
-    >
-
-    {{todo.name}}
-
+      <label [ngClass]="{'label-completed': todo.completed, 'strike': todo.completed}" class="label-completed">{{todo.name}}</label>
+    </span>
     <button type="button"
       class="btn btn-danger"
       name="delete"

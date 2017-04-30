@@ -1,0 +1,215 @@
+@import "./sass-flexbox";
+
+form {
+  @include display-flex();
+  @include flex-direction(row);
+  @include justify-content(space-between);
+  width: 90vw;
+  background-color: #47dbc3;
+  color: #2F2F28;
+  padding: 0 1em 2em 1em;
+  position: relative;
+
+  & .form-group, input {
+    width: 97%;
+    font-size: 4vw;
+    border-color: #47dbc3;
+    margin-bottom: 0;
+
+    &:focus {
+      box-shadow: 1px rgba(0, 0, 0, 0.2);
+    }
+  }
+
+  & button {
+    background-color: white;
+    font-size: 4vw;
+    color: darkslategrey;
+    font-weight: 700;
+
+    &:hover {
+      background-color: #F2F2F2;
+    }
+  }
+}
+
+.arrow-down {
+  width: 0;
+  height: 0;
+  transform: translateX(-50%);
+  position: absolute;
+  left: 50%;
+  border-left: 1.3em solid transparent;
+  border-right: 1.3em solid transparent;
+  border-top: 1.3em solid #47dbc3;
+}
+
+ul {
+  @include display-flex();
+	@include flex-flow(column, nowrap);
+  font-size: 4vw;
+  width: 80vw;
+  margin: 0 5vw;
+  background-color: white;
+  color: darkslategrey;
+  padding: 0.5em 1em 0 1em;
+  border-radius: 2px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 25px 50px 0 rgba(0, 0, 0, 0.1);
+
+  & button {
+    opacity: 0;
+    font-size: 4vw;
+    background-color: #3dbba6;
+    border-color: #35A391;
+    margin: 0;
+    padding: 0.2em 0.4em;
+    transition: 0.4s;
+    font-weight: 700;
+
+    &:hover {
+      background-color: #35A391;
+      transform: scale(1.1);
+    }
+  }
+
+  & li {
+    @include display-flex();
+    @include flex-direction(row);
+    @include justify-content(space-between);
+    @include align-items(baseline);
+    padding: 0.7em;
+    border-bottom: 1px solid lightgray;
+    transition:   ease-in-out 1s;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    &:hover {
+      button {
+        opacity: 1;
+      }
+    }
+  }
+}
+
+.form-control {
+  height: auto;
+}
+
+.label-completed {
+  color: #CCCCCC;
+  transition: 0.4s;
+}
+
+input[type=checkbox]{
+  position: relative;
+  top: 1px;
+}
+
+@keyframes strike{
+  0%   { width : 0; }
+  100% { width: 100%; }
+}
+
+.strike {
+  position: relative;
+  transition: 0.4s;
+}
+
+.strike:after {
+  content: ' ';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: #CCCCCC;
+  animation-name: strike;
+  animation-duration: 0.4s;
+  animation-timing-function: linear;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+
+/* SMALL SMARTPHONES LANDSCAPE */
+@media only screen and (min-width: 568px) {
+  form input, form button, .form-group {
+    font-size: 2vw;
+  }
+
+  ul {
+    font-size: 2.5vw;
+
+    & button {
+      font-size: 2vw;
+    }
+  }
+}
+
+/*BIG SMARTPHONES LANDSCAPE */
+@media only screen and (min-width: 640px) {
+  form input, form button, .form-group  {
+    font-size: 2.5vw;
+  }
+
+  ul {
+    font-size: 3vw;
+
+    & button {
+      font-size: 2.5vw;
+    }
+  }
+}
+
+/* TABLETS PORTRAIT */
+@media only screen and (min-width: 768px) {
+  form input, form button, form .form-group  {
+    font-size: 2vw;
+  }
+
+  ul {
+    font-size: 2.5vw;
+
+    & button {
+      font-size: 2vw;
+    }
+  }
+}
+
+
+/* TABLET LANDSCAPE / DESKTOP */
+@media only screen and (min-width: 1024px) {
+  form {
+    width: 70vw;
+    padding: 0 3em 3em 7em;
+  }
+
+  ul {
+    width: 50vw;
+    margin: 0 10vw;
+  }
+
+}
+
+/* LARGE DESKTOPS */
+@media only screen and (min-width: 1280px) {
+  form {
+    padding: 0 5rem 3rem 15rem;
+  }
+
+  form input, form button, form .form-group  {
+    font-size: 1.5vw;
+  }
+
+  ul {
+    font-size: 1.5vw;
+
+    & input[type=checkbox] {
+      top: -1px;
+    }
+    & button {
+      font-size: 1.5vw;
+    }
+  }
+}
