@@ -2,7 +2,7 @@
 
 # Mandatory2 TodoApp
 
-> Todo application built using the **MEAN** stack
+> Todo application built using [Angular](https://angular.io/)
 
 * Feel free to try the live demo at http://petrub.com/todo-app/
 
