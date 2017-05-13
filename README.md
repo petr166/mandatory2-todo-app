@@ -1,28 +1,49 @@
-# Mandatory2TodoApp
+![Preview](./preview/desktop-preview.png)
+
+# Mandatory2 TodoApp
+
+> Todo application built using the **MEAN** stack
+
+* Feel free to try the live demo at http://petrub.com/todo-app/
+
+# Features
+
+* Access your todos at any time on the web
+
+* Add todos
+
+* Check todos (mark as done)
+
+* Delete todos
+
+* Pleasant UI/UX built to look awesome from mobile to desktop
+
+# Development
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.1.
 
-## Development server
-
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-## Code scaffolding
+# Technologies
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|module`.
+* [Angular](https://angular.io/) - rich frontend web framework, helps creating fast, reliable web applications
 
-## Build
+  * [Angular-CLI](https://cli.angular.io/) - command line interface for streamlined angular development
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+  * [TypeScript](https://www.typescriptlang.org/) - superset of JavaScript that can be compiler-checked, also has types!!
 
-## Running unit tests
+* [Bootstrap](http://getbootstrap.com/) - CSS/JS framework, makes it easy to develop responsive, well polished web apps
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+* [Sass](http://sass-lang.com/) - powerful CSS extension language
 
-## Running end-to-end tests
+# How it works
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-Before running the tests make sure you are serving the app via `ng serve`.
+The application is connected to a node backend. When the app loads, it pull the todos data from the server.
 
-## Further help
+Every time a user performs an action (add, check, delete), it is send to the server and the data gets updated.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+The view gets updated as well giving the feel of live editing.
+
+# Motivation
+
+This is a school project, with the purpose of practicing **angular http requests** and **sass styling**.
